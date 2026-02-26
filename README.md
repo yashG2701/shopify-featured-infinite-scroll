@@ -5,9 +5,12 @@ A Shopify Dawn theme implementation that pins all **featured** products to the t
 ---
 
 ## Live Preview
-`___________________________`
+
+`https://yashg-development-store.myshopify.com/collections/demo-collection`
+Password: rteode
 
 ## GitHub Repository
+
 `https://github.com/yashG2701/hopify-featured-infinite-scroll`
 
 ---
@@ -40,7 +43,7 @@ templates/
 
 ### 1. How featured vs non-featured products are loaded and separated
 
-**The core challenge:** Shopify's Liquid templating only provides products on the *current page*. A featured product could be on page 4 of a 100-product collection. There is no server-side way to guarantee all 15 featured products appear first without pre-fetching.
+**The core challenge:** Shopify's Liquid templating only provides products on the _current page_. A featured product could be on page 4 of a 100-product collection. There is no server-side way to guarantee all 15 featured products appear first without pre-fetching.
 
 **Solution — fetch all, sort client-side:**
 
@@ -107,25 +110,25 @@ In **override mode** featured pinning is completely bypassed. JS performs standa
 
 ### 6. Limitations of Liquid and how they were solved
 
-| Limitation | Workaround |
-|---|---|
-| Liquid only renders products on the current page | Fetch all products client-side via AJAX API |
-| No server-side way to pin products across pages | Build master ordered list in JavaScript after full fetch |
-| Liquid cannot run asynchronously | Pass config as `<script type="application/json">` block |
-| Sort/filter params need server-side processing | Reload page so Liquid applies them, then use override mode |
+| Limitation                                       | Workaround                                                 |
+| ------------------------------------------------ | ---------------------------------------------------------- |
+| Liquid only renders products on the current page | Fetch all products client-side via AJAX API                |
+| No server-side way to pin products across pages  | Build master ordered list in JavaScript after full fetch   |
+| Liquid cannot run asynchronously                 | Pass config as `<script type="application/json">` block    |
+| Sort/filter params need server-side processing   | Reload page so Liquid applies them, then use override mode |
 
 ---
 
 ## Edge Cases Handled
 
-| Scenario | Behaviour |
-|---|---|
-| No products tagged `featured` | Normal infinite scroll — no pinning |
-| All products tagged `featured` | All appear at top, no duplicates on later batches |
-| Featured products on later API pages | All pages fetched before rendering, so all featured captured |
-| Sort or filter applied | Override mode: featured pinning disabled, Shopify native order used |
-| Very large collections | API pagination + lazy DOM rendering handles this transparently |
-| Fast scrolling | `loading` flag prevents concurrent renders |
+| Scenario                             | Behaviour                                                           |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| No products tagged `featured`        | Normal infinite scroll — no pinning                                 |
+| All products tagged `featured`       | All appear at top, no duplicates on later batches                   |
+| Featured products on later API pages | All pages fetched before rendering, so all featured captured        |
+| Sort or filter applied               | Override mode: featured pinning disabled, Shopify native order used |
+| Very large collections               | API pagination + lazy DOM rendering handles this transparently      |
+| Fast scrolling                       | `loading` flag prevents concurrent renders                          |
 
 ---
 
