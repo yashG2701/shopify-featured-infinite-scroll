@@ -76,10 +76,7 @@
   </script>
 
   <div id="inf-grid" class="inf-grid">
-    {%- comment -%}
-      Server-rendered fallback (shown before JS loads).
-      JS will clear this and take over immediately on DOMContentLoaded.
-    {%- endcomment -%}
+  
     {%- for product in collection.products limit: 20 -%}
       {% render 'inf-featured-card', product: product %}
     {%- endfor -%}
