@@ -54,7 +54,6 @@
         </details>
       {%- endfor -%}
 
-      {%- comment -%} Sort {%- endcomment -%}
       <select data-inf-sort class="inf-sort">
         {%- for option in collection.sort_options -%}
           <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>
@@ -76,7 +75,6 @@
     }
   </script>
 
-  {%- comment -%} ── Grid ── {%- endcomment -%}
   <div id="inf-grid" class="inf-grid">
     {%- comment -%}
       Server-rendered fallback (shown before JS loads).
@@ -87,7 +85,6 @@
     {%- endfor -%}
   </div>
 
-  {%- comment -%} Sentinel — watched by IntersectionObserver {%- endcomment -%}
   <div id="inf-sentinel"></div>
 
   <div id="inf-loader" class="inf-loader" hidden>
