@@ -23,13 +23,11 @@
 
 <div id="inf-collection" data-handle="{{ collection.handle }}">
 
-  {%- comment -%} ── Toolbar ── {%- endcomment -%}
   <div class="inf-toolbar">
     <span class="inf-toolbar__count">{{ collection.products_count }} products</span>
 
     <div class="inf-toolbar__right">
 
-      {%- comment -%} Filters {%- endcomment -%}
       {%- for filter in collection.filters -%}
         <details class="inf-filter">
           <summary class="inf-filter__label">
