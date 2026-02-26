@@ -37,7 +37,6 @@
 
     overrideMode = cfg.overrideMode;
 
-    // Make sentinel visible and in flow immediately
     if (sentinel) {
       sentinel.style.display  = 'block';
       sentinel.style.height   = '10px';
@@ -134,7 +133,6 @@
     loading = false;
   }
 
-  // ── Override mode: paginated fetch ───────────────────────────────
   async function fetchOverridePage() {
     if (loading || done) return;
     loading = true;
@@ -171,7 +169,6 @@
     loading = false;
   }
 
-  // ── IntersectionObserver ──────────────────────────────────────────
   function setupObserver() {
     if (!sentinel) return;
 
@@ -193,7 +190,6 @@
     observer.observe(sentinel);
   }
 
-  // ── Toolbar ───────────────────────────────────────────────────────
   function attachToolbar() {
     const sortEl = document.querySelector('[data-inf-sort]');
     if (sortEl) {
@@ -216,7 +212,6 @@
     });
   }
 
-  // ── Build card DOM element ────────────────────────────────────────
   function makeCard(p) {
     const isFeatured = hasTag(p, 'featured');
     const variant    = (p.variants && p.variants[0]) || {};
@@ -264,7 +259,6 @@
     return el;
   }
 
-  // ── Helpers ───────────────────────────────────────────────────────
   function hasTag(product, tag) {
     if (!product.tags) return false;
     const tags = Array.isArray(product.tags) ? product.tags : product.tags.split(', ');
