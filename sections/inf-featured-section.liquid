@@ -68,11 +68,6 @@
     </div>
   </div>
 
-  {%- comment -%}
-    Pass config to JS as JSON.
-    override_mode = true when sort or filter is active.
-    In override mode we skip featured pinning and do standard infinite scroll.
-  {%- endcomment -%}
   <script id="inf-config" type="application/json">
     {
       "handle":       {{ collection.handle | json }},
