@@ -1,6 +1,3 @@
-/**
- * inf-featured.js — v3 (sentinel fix)
- */
 
 (function () {
   'use strict';
@@ -65,12 +62,11 @@
       }
 
       setLoader(false);
-      renderBatch();      // Render first 20
-      setupObserver();    // Start watching sentinel AFTER first render
+      renderBatch();      
+      setupObserver();    
     }
   }
 
-  // ── Fetch ALL product pages up front ─────────────────────────────
   async function fetchAll() {
     let page = 1;
     while (true) {
@@ -106,7 +102,6 @@
     console.log('[inf] fetch complete — total featured:', featured.length, 'normal:', normal.length);
   }
 
-  // ── Render next 20 from master list ──────────────────────────────
   function renderBatch() {
     if (loading || done) return;
     loading = true;
