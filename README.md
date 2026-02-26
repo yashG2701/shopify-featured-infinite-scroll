@@ -2,7 +2,6 @@
 
 A Shopify Dawn theme implementation that pins all **featured** products to the top of a collection page, followed by remaining products, with **infinite scroll** loading 20 products per batch.
 
----
 
 ## Live Preview
 
@@ -13,11 +12,11 @@ Password: rteode
 
 `https://github.com/yashG2701/hopify-featured-infinite-scroll`
 
----
+
 
 ## File Structure
 
-```
+
 assets/
   inf-featured.js       # Infinite scroll + featured pinning logic
   inf-featured.css      # All styles (scoped with inf- prefix)
@@ -27,9 +26,7 @@ snippets/
   inf-featured-card.liquid      # Product card renderer
 templates/
   collection.inf-featured.json  # Template assigned to collection
-```
 
----
 
 ## How to Install
 
@@ -37,7 +34,6 @@ templates/
 2. Go to **Customize** → select your collection → switch template to **"Inf Featured"**
 3. Save
 
----
 
 ## Approach & Logic
 
@@ -49,11 +45,6 @@ templates/
 
 On page load, JavaScript fetches all products using the public Shopify AJAX API:
 
-```
-GET /collections/{handle}/products.json?limit=250&page=1
-GET /collections/{handle}/products.json?limit=250&page=2
-...
-```
 
 Each product's `tags` field is checked. Products tagged `featured` go into a `featured[]` array; everything else into `normal[]`. A `Set` of seen IDs prevents duplicates.
 
@@ -67,16 +58,9 @@ For a 100-product collection this is only 1 API call. For 1,000 products it's 4 
 
 An `IntersectionObserver` watches an invisible sentinel `<div>` placed below the product grid. When the sentinel scrolls into view (within 300px of the viewport), the next batch of 20 is rendered.
 
-```
-Batch 0 (initial): featured[0–14] + normal[0–4]  = 20 items
-Batch 1 (scroll):  normal[5–24]                  = 20 items
-Batch 2 (scroll):  normal[25–44]                 = 20 items
-...
-```
 
 Rendering is purely in-memory after the initial fetch — no additional API calls — making each scroll instant.
 
----
 
 ### 3. How duplicate products are prevented
 
