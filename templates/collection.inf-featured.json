@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "inf-featured-section",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

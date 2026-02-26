@@ -1,0 +1,307 @@
+/* inf-featured.css — all classes prefixed with inf- to avoid Dawn conflicts */
+
+/* ── Container ──────────────────────────────────────────────────── */
+#inf-collection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+/* ── Toolbar ────────────────────────────────────────────────────── */
+.inf-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.inf-toolbar__count {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.inf-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Sort */
+.inf-sort {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: #fff;
+  cursor: pointer;
+  min-width: 170px;
+  color: #111827;
+}
+
+.inf-sort:focus {
+  outline: 2px solid #4f46e5;
+  outline-offset: 1px;
+}
+
+/* Filters */
+.inf-filter {
+  position: relative;
+}
+
+.inf-filter__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: #fff;
+  color: #111827;
+  user-select: none;
+}
+
+.inf-filter__label::-webkit-details-marker { display: none; }
+
+.inf-filter__label::after {
+  content: '▾';
+  font-size: 0.7rem;
+  margin-left: 4px;
+}
+
+.inf-filter[open] .inf-filter__label::after {
+  content: '▴';
+}
+
+.inf-filter__count {
+  background: #4f46e5;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 1px 5px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.inf-filter__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 200;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.inf-filter__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #374151;
+}
+
+.inf-filter__option:hover {
+  background: #f3f4f6;
+}
+
+.inf-filter__val-count {
+  color: #9ca3af;
+  margin-left: auto;
+  font-size: 0.8rem;
+}
+
+/* ── Product Grid ────────────────────────────────────────────────── */
+.inf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* ── Product Card ────────────────────────────────────────────────── */
+.inf-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.inf-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+.inf-card--featured {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 2px #fde68a;
+}
+
+.inf-card--featured:hover {
+  box-shadow: 0 8px 24px rgba(245,158,11,0.25);
+}
+
+.inf-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image */
+.inf-card__img-wrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.inf-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.inf-card:hover .inf-card__img {
+  transform: scale(1.05);
+}
+
+.inf-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #f3f4f6;
+}
+
+.inf-placeholder-svg {
+  width: 60px;
+  height: 60px;
+  fill: #d1d5db;
+}
+
+/* Badge */
+.inf-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f59e0b;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Body */
+.inf-card__body {
+  padding: 14px 16px 18px;
+}
+
+.inf-card__vendor {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inf-card__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 10px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.inf-card__price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.inf-card__price--was {
+  font-weight: 400;
+  color: #9ca3af;
+  margin-right: 6px;
+}
+
+.inf-card__price--now {
+  color: #dc2626;
+}
+
+/* ── Loader ──────────────────────────────────────────────────────── */
+.inf-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 36px;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.inf-spinner {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: inf-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes inf-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Sentinel ────────────────────────────────────────────────────── */
+#inf-sentinel {
+  height: 1px;
+}
+
+/* ── End message ─────────────────────────────────────────────────── */
+.inf-end {
+  text-align: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .inf-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .inf-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .inf-grid {
+    grid-template-columns: 1fr;
+  }
+}

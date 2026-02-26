@@ -1,0 +1,118 @@
+{{ 'inf-featured.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+
+  assign has_active_filter = false
+  for filter in collection.filters
+    for value in filter.active_values
+      assign has_active_filter = true
+    endfor
+  endfor
+
+  assign has_active_sort = false
+  if sort_by != collection.default_sort_by
+    assign has_active_sort = true
+  endif
+
+  assign override_mode = false
+  if has_active_sort or has_active_filter
+    assign override_mode = true
+  endif
+-%}
+
+<div id="inf-collection" data-handle="{{ collection.handle }}">
+
+  {%- comment -%} ── Toolbar ── {%- endcomment -%}
+  <div class="inf-toolbar">
+    <span class="inf-toolbar__count">{{ collection.products_count }} products</span>
+
+    <div class="inf-toolbar__right">
+
+      {%- comment -%} Filters {%- endcomment -%}
+      {%- for filter in collection.filters -%}
+        <details class="inf-filter">
+          <summary class="inf-filter__label">
+            {{ filter.label }}
+            {%- if filter.active_values.size > 0 -%}
+              <span class="inf-filter__count">{{ filter.active_values.size }}</span>
+            {%- endif -%}
+          </summary>
+          <div class="inf-filter__dropdown">
+            {%- for value in filter.values -%}
+              <label class="inf-filter__option">
+                <input
+                  type="checkbox"
+                  data-inf-filter
+                  name="{{ value.param_name }}"
+                  value="{{ value.value }}"
+                  {% if value.active %}checked{% endif %}
+                >
+                {{ value.label }}
+                <span class="inf-filter__val-count">({{ value.count }})</span>
+              </label>
+            {%- endfor -%}
+          </div>
+        </details>
+      {%- endfor -%}
+
+      {%- comment -%} Sort {%- endcomment -%}
+      <select data-inf-sort class="inf-sort">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>
+            {{ option.name }}
+          </option>
+        {%- endfor -%}
+      </select>
+
+    </div>
+  </div>
+
+  {%- comment -%}
+    Pass config to JS as JSON.
+    override_mode = true when sort or filter is active.
+    In override mode we skip featured pinning and do standard infinite scroll.
+  {%- endcomment -%}
+  <script id="inf-config" type="application/json">
+    {
+      "handle":       {{ collection.handle | json }},
+      "total":        {{ collection.products_count | json }},
+      "perPage":      20,
+      "overrideMode": {{ override_mode | json }},
+      "sortBy":       {{ sort_by | json }}
+    }
+  </script>
+
+  {%- comment -%} ── Grid ── {%- endcomment -%}
+  <div id="inf-grid" class="inf-grid">
+    {%- comment -%}
+      Server-rendered fallback (shown before JS loads).
+      JS will clear this and take over immediately on DOMContentLoaded.
+    {%- endcomment -%}
+    {%- for product in collection.products limit: 20 -%}
+      {% render 'inf-featured-card', product: product %}
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%} Sentinel — watched by IntersectionObserver {%- endcomment -%}
+  <div id="inf-sentinel"></div>
+
+  <div id="inf-loader" class="inf-loader" hidden>
+    <span class="inf-spinner"></span> Loading…
+  </div>
+
+  <div id="inf-end" class="inf-end" hidden>
+    All products loaded.
+  </div>
+
+</div>
+
+<script src="{{ 'inf-featured.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Infinite Featured Collection",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

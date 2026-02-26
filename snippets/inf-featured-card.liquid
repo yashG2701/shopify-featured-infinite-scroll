@@ -1,0 +1,55 @@
+{% comment %}
+  Snippet: inf-featured-card.liquid
+  Usage: {% render 'inf-featured-card', product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign p = product
+  assign is_featured = false
+  if p.tags contains 'featured'
+    assign is_featured = true
+  endif
+-%}
+
+<div
+  class="inf-card{% if is_featured %} inf-card--featured{% endif %}"
+  data-product-id="{{ p.id }}"
+>
+  <a href="{{ p.url }}" class="inf-card__link">
+
+    <div class="inf-card__img-wrap">
+      {%- if p.featured_image -%}
+        <img
+          src="{{ p.featured_image | image_url: width: 400 }}"
+          alt="{{ p.featured_image.alt | escape }}"
+          width="400"
+          height="{{ 400 | divided_by: p.featured_image.aspect_ratio | round }}"
+          loading="lazy"
+          class="inf-card__img"
+        >
+      {%- else -%}
+        <div class="inf-card__img-placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'inf-placeholder-svg' }}
+        </div>
+      {%- endif -%}
+
+      {%- if is_featured -%}
+        <span class="inf-card__badge">⭐ Featured</span>
+      {%- endif -%}
+    </div>
+
+    <div class="inf-card__body">
+      <p class="inf-card__vendor">{{ p.vendor | escape }}</p>
+      <h3 class="inf-card__title">{{ p.title | escape }}</h3>
+      <p class="inf-card__price">
+        {%- if p.compare_at_price > p.price -%}
+          <s class="inf-card__price--was">{{ p.compare_at_price | money }}</s>
+          <span class="inf-card__price--now">{{ p.price | money }}</span>
+        {%- else -%}
+          {{ p.price | money }}
+        {%- endif -%}
+      </p>
+    </div>
+
+  </a>
+</div>
