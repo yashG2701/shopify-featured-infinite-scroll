@@ -1,13 +1,10 @@
-/* inf-featured.css — all classes prefixed with inf- to avoid Dawn conflicts */
 
-/* ── Container ──────────────────────────────────────────────────── */
 #inf-collection {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 16px 80px;
 }
 
-/* ── Toolbar ────────────────────────────────────────────────────── */
 .inf-toolbar {
   display: flex;
   align-items: center;
@@ -31,7 +28,6 @@
   flex-wrap: wrap;
 }
 
-/* Sort */
 .inf-sort {
   padding: 8px 12px;
   border: 1px solid #d1d5db;
@@ -48,7 +44,6 @@
   outline-offset: 1px;
 }
 
-/* Filters */
 .inf-filter {
   position: relative;
 }
@@ -123,7 +118,6 @@
   font-size: 0.8rem;
 }
 
-/* ── Product Grid ────────────────────────────────────────────────── */
 .inf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -131,7 +125,6 @@
   margin-bottom: 32px;
 }
 
-/* ── Product Card ────────────────────────────────────────────────── */
 .inf-card {
   background: #fff;
   border-radius: 10px;
@@ -192,7 +185,6 @@
   fill: #d1d5db;
 }
 
-/* Badge */
 .inf-card__badge {
   position: absolute;
   top: 10px;
@@ -207,7 +199,6 @@
   text-transform: uppercase;
 }
 
-/* Body */
 .inf-card__body {
   padding: 14px 16px 18px;
 }
@@ -249,7 +240,6 @@
   color: #dc2626;
 }
 
-/* ── Loader ──────────────────────────────────────────────────────── */
 .inf-loader {
   display: flex;
   align-items: center;
@@ -275,12 +265,10 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Sentinel ────────────────────────────────────────────────────── */
 #inf-sentinel {
   height: 1px;
 }
 
-/* ── End message ─────────────────────────────────────────────────── */
 .inf-end {
   text-align: center;
   padding: 40px 20px;
@@ -288,7 +276,6 @@
   font-size: 0.875rem;
 }
 
-/* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .inf-grid {
     grid-template-columns: repeat(2, 1fr);
